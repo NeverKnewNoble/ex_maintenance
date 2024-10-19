@@ -1,7 +1,6 @@
 // Copyright (c) 2024, Nortex and contributors
 // For license information, please see license.txt
 
-
 // ? Function to get request time
 frappe.ui.form.on("Ex Requests", {
     refresh(frm) {

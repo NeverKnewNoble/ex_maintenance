@@ -24,7 +24,9 @@
   "section_break_jgve",
   "further_information",
   "management_tab",
-  "status"
+  "status",
+  "completed_date",
+  "request_completed_time"
  ],
  "fields": [
   {
@@ -110,6 +112,7 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Open\nIn Progress\nCompleted"
   },
@@ -125,11 +128,23 @@
    "fieldtype": "Link",
    "label": "Request Code",
    "options": "Ex Requests"
+  },
+  {
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fieldname": "completed_date",
+   "fieldtype": "Date",
+   "label": "Completed Date"
+  },
+  {
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fieldname": "request_completed_time",
+   "fieldtype": "Time",
+   "label": "Request Completed Time"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-18 17:40:17.659780",
+ "modified": "2024-10-19 14:29:45.440152",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Work Order",
