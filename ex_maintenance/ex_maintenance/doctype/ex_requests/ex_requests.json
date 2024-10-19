@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ExR-{#####}",
+ "creation": "2024-10-18 10:38:37.393175",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "your_location_section",
+  "location",
+  "room_number",
+  "other",
+  "column_break_fgcy",
+  "request_time",
+  "upload_an_image_for_clarification_section",
+  "upload_an_image",
+  "section_break_kqqs",
+  "table_umyd",
+  "convenient_time_scheduling_optional_section",
+  "date",
+  "column_break_lmpy",
+  "time",
+  "section_break_mmsm",
+  "further_description"
+ ],
+ "fields": [
+  {
+   "fieldname": "upload_an_image",
+   "fieldtype": "Attach Image",
+   "label": "Image "
+  },
+  {
+   "fieldname": "section_break_kqqs",
+   "fieldtype": "Section Break",
+   "label": "Raise Your Issue "
+  },
+  {
+   "fieldname": "table_umyd",
+   "fieldtype": "Table",
+   "label": "Issue",
+   "options": "Ex Issue Type"
+  },
+  {
+   "fieldname": "upload_an_image_for_clarification_section",
+   "fieldtype": "Section Break",
+   "label": "Upload Image For Clarification"
+  },
+  {
+   "fieldname": "your_location_section",
+   "fieldtype": "Section Break",
+   "label": "Your Location"
+  },
+  {
+   "fieldname": "column_break_fgcy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.location == 'Guest Room'",
+   "fieldname": "room_number",
+   "fieldtype": "Int",
+   "label": "Room Number"
+  },
+  {
+   "depends_on": "eval:doc.location == 'Other'",
+   "fieldname": "other",
+   "fieldtype": "Data",
+   "label": "Other"
+  },
+  {
+   "fieldname": "section_break_mmsm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "further_description",
+   "fieldtype": "Small Text",
+   "label": "Further Description"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Select",
+   "label": "Location/Room",
+   "options": "\nGuest Room\nLobby\nLounge Area\nPool Area\nGym/Fitness Center\nSpa\nSavana Bar (or similar hotel bar)\nRestaurant\nConference Hall\nMeeting Room\nBanquet Hall\nRooftop Bar\nBusiness Center\nElevators\nParking Lot\nReception Desk\nGarden/Patio\nTerrace\nBallroom\nValet Parking Area\nOther"
+  },
+  {
+   "fieldname": "convenient_time_scheduling_optional_section",
+   "fieldtype": "Section Break",
+   "label": "Convenient Time Scheduling (Optional)"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date "
+  },
+  {
+   "fieldname": "column_break_lmpy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time "
+  },
+  {
+   "fieldname": "request_time",
+   "fieldtype": "Time",
+   "label": "Request TIme"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-18 17:14:38.134011",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Ex Requests",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

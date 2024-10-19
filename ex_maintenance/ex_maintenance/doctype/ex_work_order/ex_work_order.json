@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ExO-{####}",
+ "creation": "2024-10-18 12:35:40.686300",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_details_tab",
+  "image_uploaded",
+  "image",
+  "request_section",
+  "name1",
+  "room_number",
+  "other",
+  "column_break_qqwy",
+  "request_code",
+  "section_break_mtez",
+  "issue",
+  "convenient_time_scheduling_section",
+  "date",
+  "column_break_lnki",
+  "time",
+  "section_break_jgve",
+  "further_information",
+  "management_tab",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "request_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Location"
+  },
+  {
+   "fieldname": "management_tab",
+   "fieldtype": "Tab Break",
+   "label": "Management"
+  },
+  {
+   "fieldname": "request_section",
+   "fieldtype": "Section Break",
+   "label": "Request"
+  },
+  {
+   "depends_on": "eval:doc.name1 == 'Other'",
+   "fieldname": "other",
+   "fieldtype": "Data",
+   "label": "Other"
+  },
+  {
+   "fieldname": "column_break_qqwy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.name1 == 'Guest Room'",
+   "fieldname": "room_number",
+   "fieldtype": "Data",
+   "label": "Room Number"
+  },
+  {
+   "fieldname": "image_uploaded",
+   "fieldtype": "Image",
+   "label": "Image Uploaded ",
+   "options": "image"
+  },
+  {
+   "fieldname": "section_break_mtez",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "issue",
+   "fieldtype": "Table",
+   "label": "Issue",
+   "options": "Ex Issue Type"
+  },
+  {
+   "fieldname": "convenient_time_scheduling_section",
+   "fieldtype": "Section Break",
+   "label": "Convenient Time Scheduling"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Data",
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_lnki",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Data",
+   "label": "TIme"
+  },
+  {
+   "fieldname": "section_break_jgve",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "further_information",
+   "fieldtype": "Small Text",
+   "label": "Further Information"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nIn Progress\nCompleted"
+  },
+  {
+   "fetch_from": "request_code.upload_an_image",
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image"
+  },
+  {
+   "fieldname": "request_code",
+   "fieldtype": "Link",
+   "label": "Request Code",
+   "options": "Ex Requests"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-18 17:40:17.659780",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Ex Work Order",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
