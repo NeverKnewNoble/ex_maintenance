@@ -1,0 +1,22 @@
+{
+ "color": "#4463F0",
+ "creation": "2024-10-22 09:31:06.829510",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "filters_json": "null",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Average Response Time ",
+ "method": "ex_maintenance.ex_maintenance.doctype.response_time.response_time.calculate_average_response_time",
+ "modified": "2024-10-22 09:39:43.696387",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Average Response Time",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Custom"
+}

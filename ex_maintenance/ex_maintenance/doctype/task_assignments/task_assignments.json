@@ -1,0 +1,129 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:Task-{#####}",
+ "creation": "2024-10-22 11:34:54.989071",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "please_press_this_button_to_update_your_manager_section",
+  "update_task",
+  "column_break_evuf",
+  "hidden_field",
+  "column_break_lmlr",
+  "hidden_field2",
+  "manager_section",
+  "priority",
+  "instructions",
+  "section_break_lnco",
+  "attach_work_progress",
+  "section_break_xhvf",
+  "column_break_larm",
+  "status",
+  "description_on_the_task"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_larm",
+   "fieldtype": "Column Break",
+   "options": "Open\nIn Progress\nCompleted\nOverdue"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nIn Progress\nCompleted"
+  },
+  {
+   "fieldname": "description_on_the_task",
+   "fieldtype": "Small Text",
+   "label": "Description On The Task"
+  },
+  {
+   "fieldname": "attach_work_progress",
+   "fieldtype": "Attach Image",
+   "label": "Attach Image"
+  },
+  {
+   "fieldname": "section_break_xhvf",
+   "fieldtype": "Section Break",
+   "label": "Update "
+  },
+  {
+   "fieldname": "manager_section",
+   "fieldtype": "Section Break",
+   "label": "Manager"
+  },
+  {
+   "fieldname": "instructions",
+   "fieldtype": "Small Text",
+   "label": "Instructions"
+  },
+  {
+   "fieldname": "section_break_lnco",
+   "fieldtype": "Section Break",
+   "label": "Attach Image Of Work Progress"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "Low\nMedium\nHigh\nUrgent"
+  },
+  {
+   "fieldname": "please_press_this_button_to_update_your_manager_section",
+   "fieldtype": "Section Break",
+   "label": "Please Press This Button To Update Your Manager"
+  },
+  {
+   "fieldname": "update_task",
+   "fieldtype": "Button",
+   "label": "Update Task"
+  },
+  {
+   "fieldname": "column_break_evuf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hidden_field",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "hidden Field"
+  },
+  {
+   "fieldname": "column_break_lmlr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hidden_field2",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "hidden field2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-23 19:47:34.696610",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Task Assignments",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

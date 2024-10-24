@@ -3,7 +3,7 @@
 
 
 frappe.ui.form.on("Ex Work Order", {
-    // ! Function to call current data and time when order is completed
+// ! Function to call current data and time when order is completed
     status: function(frm) {
         // Check if the status is 'Completed'
         if (frm.doc.status === 'Completed') {
@@ -18,4 +18,41 @@ frappe.ui.form.on("Ex Work Order", {
     }
 });
 
+
+// ! On save, it calls the assign to individual function
+frappe.ui.form.on('Ex Work Order', {
+    after_save: function(frm) {
+        frappe.call({
+            method: 'ex_maintenance.ex_maintenance.doctype.ex_work_order.ex_work_order.create_task_assignment',
+            args: {
+                ex_work_order: frm.doc  // This will pass the form data as an object
+            },
+            callback: function(response) {
+                if (response.message) {
+                    frappe.msgprint(__('Task Assignment(s) created successfully.'));
+                }
+            }
+        });
+    }
+});
+
+
+// ! On save, it calls the assign to Team function
+frappe.ui.form.on('Ex Work Order', {
+    after_save: function(frm) {
+        if (frm.doc.is_a_team) {
+            frappe.call({
+                method: 'ex_maintenance.ex_maintenance.doctype.ex_work_order.ex_work_order.assign_to_team',
+                args: {
+                    ex_work_order: frm.doc  // This will pass the form data as an object
+                },
+                callback: function(response) {
+                    if (response.message) {
+                        frappe.msgprint(__('Task Assignment(s) created and assigned to the team successfully.'));
+                    }
+                }
+            });
+        }
+    }
+});
 

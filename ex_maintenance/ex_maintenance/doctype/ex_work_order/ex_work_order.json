@@ -7,14 +7,21 @@
  "engine": "InnoDB",
  "field_order": [
   "request_details_tab",
+  "column_break_dlzp",
+  "hidden_field_copy",
+  "column_break_uvkv",
   "image_uploaded",
-  "image",
+  "column_break_nesx",
+  "hidden_field_copy_copy",
   "request_section",
   "name1",
-  "room_number",
-  "other",
   "column_break_qqwy",
   "request_code",
+  "detail_fields_section",
+  "room_number",
+  "image",
+  "column_break_sxcr",
+  "other",
   "section_break_mtez",
   "issue",
   "convenient_time_scheduling_section",
@@ -24,9 +31,29 @@
   "section_break_jgve",
   "further_information",
   "management_tab",
+  "section_break_gihf",
+  "priority_level",
+  "column_break_gyzr",
   "status",
   "completed_date",
-  "request_completed_time"
+  "request_completed_time",
+  "assign_task_to_teamindividual_section",
+  "is_a_team",
+  "team_descriptioninstructions",
+  "is_an_indvidual",
+  "assign_task",
+  "set_a_deadline_optional_section",
+  "deadline_date",
+  "column_break_ksun",
+  "deadline_time",
+  "assignment_response_tab",
+  "attach_image_rypl",
+  "column_break_wlqo",
+  "image_spwk",
+  "column_break_dnmj",
+  "dummy_field",
+  "section_break_cokp",
+  "description_on_the_task"
  ],
  "fields": [
   {
@@ -50,7 +77,7 @@
    "label": "Request"
   },
   {
-   "depends_on": "eval:doc.name1 == 'Other'",
+   "depends_on": "// eval:doc.name1 == 'Other'",
    "fieldname": "other",
    "fieldtype": "Data",
    "label": "Other"
@@ -60,7 +87,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.name1 == 'Guest Room'",
+   "depends_on": "// eval:doc.name1 == 'Guest Room'",
    "fieldname": "room_number",
    "fieldtype": "Data",
    "label": "Room Number"
@@ -68,8 +95,12 @@
   {
    "fieldname": "image_uploaded",
    "fieldtype": "Image",
+   "in_preview": 1,
    "label": "Image Uploaded ",
-   "options": "image"
+   "max_height": "50px",
+   "options": "image",
+   "print_width": "50px",
+   "width": "50px"
   },
   {
    "fieldname": "section_break_mtez",
@@ -114,7 +145,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Open\nIn Progress\nCompleted"
+   "options": "Open\nIn Progress\nCompleted\nOverdue"
   },
   {
    "fetch_from": "request_code.upload_an_image",
@@ -140,11 +171,145 @@
    "fieldname": "request_completed_time",
    "fieldtype": "Time",
    "label": "Request Completed Time"
+  },
+  {
+   "fieldname": "column_break_dlzp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "set_a_deadline_optional_section",
+   "fieldtype": "Section Break",
+   "label": "Set A deadline (Optional)"
+  },
+  {
+   "fieldname": "deadline_date",
+   "fieldtype": "Date",
+   "label": "Deadline Date"
+  },
+  {
+   "fieldname": "column_break_ksun",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "deadline_time",
+   "fieldtype": "Time",
+   "label": "Deadline Time"
+  },
+  {
+   "fieldname": "priority_level",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Priority Level",
+   "options": "Low\nMedium\nHigh\nUrgent"
+  },
+  {
+   "fieldname": "section_break_gihf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_gyzr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assign_task_to_teamindividual_section",
+   "fieldtype": "Section Break",
+   "label": "Assign Task To Team/Individual"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_a_team",
+   "fieldtype": "Check",
+   "label": "Is a Team"
+  },
+  {
+   "depends_on": "eval:doc.is_a_team == 1",
+   "fieldname": "team_descriptioninstructions",
+   "fieldtype": "Small Text",
+   "label": "Team Description/Instructions"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_an_indvidual",
+   "fieldtype": "Check",
+   "label": "Is an Indvidual"
+  },
+  {
+   "depends_on": "eval:doc.is_an_indvidual == 1",
+   "fieldname": "assign_task",
+   "fieldtype": "Table",
+   "label": "Assign Task",
+   "options": "Ex Task Assignment"
+  },
+  {
+   "fieldname": "assignment_response_tab",
+   "fieldtype": "Tab Break",
+   "label": "Assignment Response"
+  },
+  {
+   "fieldname": "attach_image_rypl",
+   "fieldtype": "Attach Image",
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_wlqo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "image_spwk",
+   "fieldtype": "Image"
+  },
+  {
+   "fieldname": "column_break_dnmj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dummy_field",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "dummy field"
+  },
+  {
+   "fieldname": "section_break_cokp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description_on_the_task",
+   "fieldtype": "Small Text",
+   "label": "Description On The Task"
+  },
+  {
+   "fieldname": "detail_fields_section",
+   "fieldtype": "Section Break",
+   "label": "Detail Fields"
+  },
+  {
+   "fieldname": "column_break_sxcr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_uvkv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hidden_field_copy",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "hidden field Copy"
+  },
+  {
+   "fieldname": "column_break_nesx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hidden_field_copy_copy",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "hidden field Copy Copy"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-19 14:29:45.440152",
+ "modified": "2024-10-23 13:52:22.726387",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Work Order",

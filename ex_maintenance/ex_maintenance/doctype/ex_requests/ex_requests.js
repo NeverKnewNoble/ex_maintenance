@@ -27,8 +27,8 @@ frappe.ui.form.on('Ex Requests', {
                         id: frm.doc.name,
                         date: frm.doc.date,
                         time: frm.doc.time,
-                        further_description: frm.doc.further_description,
-                        table_umyd: frm.doc.table_umyd || []
+                        further_description: frm.doc.further_information,
+                        table_umyd: frm.doc.issue || []
                     }
                 },
                 callback: function(response) {

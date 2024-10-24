@@ -1,7 +1,7 @@
 {
  "app": "ex_maintenance",
  "charts": [],
- "content": "[{\"id\":\"MLg9AFi5XN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Welcome</b></span>\",\"col\":12}},{\"id\":\"4SEZbuQvaa\",\"type\":\"card\",\"data\":{\"card_name\":\"Guests\",\"col\":4}},{\"id\":\"1leo_bvmZp\",\"type\":\"card\",\"data\":{\"card_name\":\"Manager\",\"col\":4}}]",
+ "content": "[{\"id\":\"MLg9AFi5XN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Welcome</b></span>\",\"col\":12}},{\"id\":\"fzP94xNVL6\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Average Response Time\",\"col\":4}},{\"id\":\"eHE1VH2T7S\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Maintenance \",\"col\":4}},{\"id\":\"c4PaFAzdj6\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Maintenance \",\"col\":4}},{\"id\":\"yQabz4yH0-\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"4SEZbuQvaa\",\"type\":\"card\",\"data\":{\"card_name\":\"Guests\",\"col\":4}},{\"id\":\"1leo_bvmZp\",\"type\":\"card\",\"data\":{\"card_name\":\"Manager\",\"col\":4}},{\"id\":\"T5QnwY4PkZ\",\"type\":\"card\",\"data\":{\"card_name\":\"Team/ Individual Tasks\",\"col\":4}},{\"id\":\"TK2YCH7t6i\",\"type\":\"card\",\"data\":{\"card_name\":\"Accessories\",\"col\":4}}]",
  "creation": "2024-10-17 23:46:31.577254",
  "custom_blocks": [],
  "docstatus": 0,
@@ -37,8 +37,46 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Manager",
+   "label": "Accessories",
    "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ex Reminder",
+   "link_count": 0,
+   "link_to": "Reminder",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Team/ Individual Tasks",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ex Task Assignments",
+   "link_count": 0,
+   "link_to": "Task Assignments",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Manager",
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -52,13 +90,36 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ex Response Time",
+   "link_count": 0,
+   "link_to": "Response Time",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-10-18 13:05:54.067811",
+ "modified": "2024-10-23 13:53:01.969884",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Maintenance",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "Open Maintenance ",
+   "number_card_name": "Open Maintenance Tasks"
+  },
+  {
+   "label": "Average Response Time",
+   "number_card_name": "Average Response Time"
+  },
+  {
+   "label": "Completed Maintenance ",
+   "number_card_name": "Completed Maintenance Tasks"
+  }
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
