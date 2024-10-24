@@ -18,6 +18,8 @@ def create_task_assignment(ex_work_order):
         # Check if the expected fields are present
         priority_level = ex_work_order.get('priority_level')
         status = ex_work_order.get('status')
+        deadline_date = ex_work_order.get('deadline_date')
+        deadline_time = ex_work_order.get('deadline_time')
         assign_task = ex_work_order.get('assign_task', [])
 
         # ? Iterate over the child table (assign_task) in Ex Work Order, if it exists
@@ -33,7 +35,9 @@ def create_task_assignment(ex_work_order):
                         'doctype': 'Task Assignments',
                         'priority': priority_level,
                         'status': status,
-                        'instructions': instructions  # Populate the instructions field
+                        'instructions': instructions,
+                        'deadline_set_date': deadline_date,
+                        'deadline_set_time': deadline_time,
                     })
 
                     # ? Save the new Task Assignments document (as draft)
@@ -83,6 +87,8 @@ def assign_to_team(ex_work_order):
             # Check if the expected fields are present
             priority_level = ex_work_order.get('priority_level')
             status = ex_work_order.get('status')
+            deadline_date = ex_work_order.get('deadline_date')
+            deadline_time = ex_work_order.get('deadline_time')
 
             if team_descriptioninstructions and team_members:
                 # ? Create the new Task Assignments document using the team instructions
@@ -90,7 +96,9 @@ def assign_to_team(ex_work_order):
                     'doctype': 'Task Assignments',
                     'priority': priority_level,
                     'status': status,
-                    'instructions': team_descriptioninstructions  # Use team_descriptioninstructions directly
+                    'instructions': team_descriptioninstructions,
+                    'deadline_set_date': deadline_date,
+                    'deadline_set_time': deadline_time,
                 })
 
                 # ? Save the new Task Assignments document (as draft)

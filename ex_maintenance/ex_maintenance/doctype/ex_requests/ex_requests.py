@@ -9,6 +9,7 @@ class ExRequests(Document):
         # ? Call the method to create the Work Order
         create_work_order(self)
 
+
 # ! Function to create new work order doc for manager 
 @frappe.whitelist()
 def create_work_order(ex_request):
@@ -16,7 +17,7 @@ def create_work_order(ex_request):
         # ? Create the new Work Order document
         work_order = frappe.get_doc({
             'doctype': 'Ex Work Order',
-            'name1': ex_request.location,  # Assuming location is a field in Ex Request
+            'location': ex_request.location,  # Assuming location is a field in Ex Request
             'room_number': ex_request.room_number,  # Field in Ex Request
             'other': ex_request.other,  # Other field
             'request_code': ex_request.name,  # The request document name (ID)

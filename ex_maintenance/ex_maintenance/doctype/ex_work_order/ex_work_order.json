@@ -9,18 +9,17 @@
   "request_details_tab",
   "column_break_dlzp",
   "hidden_field_copy",
+  "image",
   "column_break_uvkv",
   "image_uploaded",
   "column_break_nesx",
   "hidden_field_copy_copy",
   "request_section",
-  "name1",
+  "location",
   "column_break_qqwy",
   "request_code",
-  "detail_fields_section",
+  "section_break_jbkn",
   "room_number",
-  "image",
-  "column_break_sxcr",
   "other",
   "section_break_mtez",
   "issue",
@@ -62,11 +61,6 @@
    "label": "Request Details"
   },
   {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "label": "Location"
-  },
-  {
    "fieldname": "management_tab",
    "fieldtype": "Tab Break",
    "label": "Management"
@@ -77,7 +71,8 @@
    "label": "Request"
   },
   {
-   "depends_on": "// eval:doc.name1 == 'Other'",
+   "depends_on": "eval:doc.location == 'Other'",
+   "fetch_from": "request_code.other",
    "fieldname": "other",
    "fieldtype": "Data",
    "label": "Other"
@@ -87,7 +82,8 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "// eval:doc.name1 == 'Guest Room'",
+   "depends_on": "eval:doc.location == 'Guest Room'",
+   "fetch_from": "request_code.room_number",
    "fieldname": "room_number",
    "fieldtype": "Data",
    "label": "Room Number"
@@ -278,15 +274,6 @@
    "label": "Description On The Task"
   },
   {
-   "fieldname": "detail_fields_section",
-   "fieldtype": "Section Break",
-   "label": "Detail Fields"
-  },
-  {
-   "fieldname": "column_break_sxcr",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_uvkv",
    "fieldtype": "Column Break"
   },
@@ -305,11 +292,20 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "hidden field Copy Copy"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location"
+  },
+  {
+   "fieldname": "section_break_jbkn",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-23 13:52:22.726387",
+ "modified": "2024-10-24 23:19:36.214756",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Work Order",
