@@ -10,35 +10,49 @@
   "manager_section",
   "priority",
   "instructions",
+  "doc_reference",
   "section_break_hopp",
   "deadline_set_date",
   "column_break_nygb",
   "deadline_set_time",
+  "request_information_tab",
+  "image",
+  "column_break_cgpt",
+  "picture_of",
+  "column_break_qaab",
+  "dummy_field",
+  "section_break_rslo",
+  "location",
+  "column_break_aayy",
+  "request_code",
+  "section_break_dllk",
+  "room_number",
+  "other",
+  "section_break_adhj",
+  "issue",
+  "convenient_time_scheduling_section",
+  "date",
+  "column_break_cewc",
+  "time",
+  "section_break_jfks",
+  "further_information",
   "assigned_personnel_tab",
-  "please_press_this_button_to_update_your_manager_section",
-  "update_task",
-  "column_break_evuf",
-  "hidden_field",
-  "column_break_lmlr",
-  "hidden_field2",
   "section_break_xhvf",
   "column_break_larm",
-  "status",
+  "task_status",
   "description_on_the_task",
   "section_break_lnco",
-  "attach_work_progress"
+  "attach_work_progress",
+  "section_break_xcba",
+  "assignee",
+  "column_break_jzix",
+  "assignee_no"
  ],
  "fields": [
   {
    "fieldname": "column_break_larm",
    "fieldtype": "Column Break",
    "options": "Open\nIn Progress\nCompleted\nOverdue"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Open\nIn Progress\nCompleted"
   },
   {
    "fieldname": "description_on_the_task",
@@ -53,7 +67,7 @@
   {
    "fieldname": "section_break_xhvf",
    "fieldtype": "Section Break",
-   "label": "Update "
+   "label": "Please Press The \"Update Linked Document\" Button To Update Your Manager"
   },
   {
    "fieldname": "manager_section",
@@ -63,7 +77,8 @@
   {
    "fieldname": "instructions",
    "fieldtype": "Small Text",
-   "label": "Instructions"
+   "label": "Instructions",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_lnco",
@@ -74,37 +89,8 @@
    "fieldname": "priority",
    "fieldtype": "Select",
    "label": "Priority",
-   "options": "Low\nMedium\nHigh\nUrgent"
-  },
-  {
-   "fieldname": "please_press_this_button_to_update_your_manager_section",
-   "fieldtype": "Section Break",
-   "label": "Please Press This Button To Update Your Manager"
-  },
-  {
-   "fieldname": "update_task",
-   "fieldtype": "Button",
-   "label": "Update Task"
-  },
-  {
-   "fieldname": "column_break_evuf",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "hidden_field",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "hidden Field"
-  },
-  {
-   "fieldname": "column_break_lmlr",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "hidden_field2",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "hidden field2"
+   "options": "Low\nMedium\nHigh\nUrgent",
+   "read_only": 1
   },
   {
    "fieldname": "manager_details_tab",
@@ -135,11 +121,169 @@
    "fieldtype": "Time",
    "label": "Deadline Set Time",
    "read_only": 1
+  },
+  {
+   "fieldname": "request_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Request Information"
+  },
+  {
+   "fieldname": "column_break_cgpt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "picture_of",
+   "fieldtype": "Image",
+   "label": "Image Uploaded",
+   "max_height": "50px",
+   "options": "image",
+   "print_width": "50px",
+   "width": "50px"
+  },
+  {
+   "fieldname": "column_break_qaab",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dummy_field",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Dummy Field"
+  },
+  {
+   "fieldname": "section_break_rslo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "request_code.location",
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_aayy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "request_code",
+   "fieldtype": "Link",
+   "label": "Request Code",
+   "options": "Ex Requests",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_dllk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.location == 'Guest Room'",
+   "fetch_from": "request_code.room_number",
+   "fieldname": "room_number",
+   "fieldtype": "Data",
+   "label": "Room Number",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.location == 'Other'",
+   "fetch_from": "request_code.other",
+   "fieldname": "other",
+   "fieldtype": "Data",
+   "label": "Other",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_adhj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "issue",
+   "fieldtype": "Table",
+   "label": "Issue",
+   "options": "Ex Issue Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "convenient_time_scheduling_section",
+   "fieldtype": "Section Break",
+   "label": "Convenient Time Scheduling"
+  },
+  {
+   "fetch_from": "request_code.date",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_cewc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "request_code.time",
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_jfks",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "request_code.further_description",
+   "fieldname": "further_information",
+   "fieldtype": "Small Text",
+   "label": "Further Information",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "request_code.upload_an_image",
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image"
+  },
+  {
+   "fieldname": "doc_reference",
+   "fieldtype": "Link",
+   "label": "Doc Reference",
+   "options": "Ex Work Order",
+   "read_only": 1
+  },
+  {
+   "fieldname": "task_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nIn Progress\nCompleted"
+  },
+  {
+   "fieldname": "assignee",
+   "fieldtype": "Link",
+   "label": "Assignee",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_xcba",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fetch_from": "assignee.phone",
+   "fieldname": "assignee_no",
+   "fieldtype": "Data",
+   "label": "Assignee No.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jzix",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-24 17:47:41.854184",
+ "modified": "2024-10-31 16:14:54.047228",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Task Assignments",

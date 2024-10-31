@@ -39,8 +39,8 @@ def create_work_order(ex_request):
         # ? Save the new Work Order (as draft)
         work_order.insert()
 
-        frappe.msgprint(f"Work Order {work_order.name} created successfully!")
-        return work_order.name
+        # frappe.msgprint(f"Work Order {work_order.name} created successfully!")
+        # return work_order.name
 
     except Exception as e:
         frappe.log_error(f"Error creating Work Order: {str(e)}")

@@ -1,0 +1,29 @@
+{
+ "attach_print": 0,
+ "channel": "System Notification",
+ "creation": "2024-10-31 14:11:02.389725",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Ex Requests",
+ "enabled": 0,
+ "event": "New",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<h1>Maintenance Request</h1>\n<p>Please attend to the request sent:\n<br> <b>{{ doc.name }}</b> </p>\n<h5>Thank You</h5>",
+ "message_type": "HTML",
+ "minutes_offset": 0,
+ "modified": "2024-10-31 17:19:12.650860",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "MainReq",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "Ex Maintenance Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "Maintenance Request {{ doc.name }}"
+}

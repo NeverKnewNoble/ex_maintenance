@@ -1,0 +1,32 @@
+{
+ "attach_print": 0,
+ "channel": "System Notification",
+ "condition": "",
+ "creation": "2024-10-30 14:10:32.728145",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Ex Requests",
+ "enabled": 0,
+ "event": "New",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<h1>Maintenance Requested</h1>\n<p>Please attend to the request sent to you:</p>\n<b>{{ doc.name }}</b>\n<h5>Thank you.</h5>",
+ "message_type": "HTML",
+ "minutes_offset": 0,
+ "modified": "2024-10-30 15:52:04.758911",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Maintenance Request",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "Ex Maintenance Manager"
+  }
+ ],
+ "send_system_notification": 1,
+ "send_to_all_assignees": 0,
+ "sender": "Nortex",
+ "sender_email": "nortexnoble@gmail.com",
+ "subject": "Maintenance Requested {{ doc.name }}"
+}

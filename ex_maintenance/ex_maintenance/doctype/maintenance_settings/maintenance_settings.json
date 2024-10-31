@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-30 12:04:50.787931",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "notifications_section",
+  "send_system_message",
+  "column_break_fhrs",
+  "send_email",
+  "column_break_lusg",
+  "send_sms"
+ ],
+ "fields": [
+  {
+   "fieldname": "notifications_section",
+   "fieldtype": "Section Break",
+   "label": "Notifications"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_system_message",
+   "fieldtype": "Check",
+   "label": "Send via System Message"
+  },
+  {
+   "fieldname": "column_break_fhrs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_email",
+   "fieldtype": "Check",
+   "label": "Send via Email"
+  },
+  {
+   "fieldname": "column_break_lusg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_sms",
+   "fieldtype": "Check",
+   "label": "Send via SMS"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-10-30 12:06:52.924798",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Maintenance Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -12,11 +12,11 @@
   "management_document",
   "request_section",
   "request_date",
-  "column_break_shqi",
+  "column_break_xcsu",
   "request_time",
   "management_section",
   "completed_date",
-  "column_break_jjzg",
+  "column_break_mjsu",
   "completed_time"
  ],
  "fields": [
@@ -47,18 +47,11 @@
    "label": "Request"
   },
   {
-   "fieldname": "request_date",
-   "fieldtype": "Date",
-   "label": "Request Date"
-  },
-  {
-   "fieldname": "column_break_shqi",
-   "fieldtype": "Column Break"
-  },
-  {
+   "fetch_from": "request_document.request_time",
    "fieldname": "request_time",
    "fieldtype": "Time",
-   "label": "Request Time"
+   "label": "Request Time",
+   "read_only": 1
   },
   {
    "fieldname": "management_section",
@@ -66,23 +59,38 @@
    "label": "Management"
   },
   {
-   "fieldname": "completed_date",
-   "fieldtype": "Date",
-   "label": "Completed Date"
+   "fetch_from": "management_document.request_completed_time",
+   "fieldname": "completed_time",
+   "fieldtype": "Time",
+   "label": "Completed Time",
+   "read_only": 1
   },
   {
-   "fieldname": "column_break_jjzg",
+   "fetch_from": "request_document.request_date",
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xcsu",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "completed_time",
-   "fieldtype": "Time",
-   "label": "Completed TIme"
+   "fetch_from": "management_document.completed_date",
+   "fieldname": "completed_date",
+   "fieldtype": "Date",
+   "label": "Completed Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mjsu",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-22 09:59:12.217781",
+ "modified": "2024-10-30 10:03:52.037467",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Response Time",

@@ -1,0 +1,32 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "creation": "2024-10-31 14:32:44.900311",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Task Assignments",
+ "enabled": 0,
+ "event": "New",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<h1>Maintenance Task Assignment</h1>\n\n<p>Please attend to the task assigned to you:\n<br> <b>{{ doc.name }}</b> </p>\n\n<h5>Thank You</h5>\n",
+ "message_type": "HTML",
+ "minutes_offset": 0,
+ "modified": "2024-10-31 17:19:13.645790",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "TaskAss (Email)",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_document_field": "assignee",
+   "receiver_by_role": ""
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "sender": "Nortex",
+ "sender_email": "nortexnoble@gmail.com",
+ "subject": "Maintenance Task Email {{ doc.name }}"
+}

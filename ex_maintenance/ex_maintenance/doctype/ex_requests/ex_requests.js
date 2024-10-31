@@ -6,6 +6,7 @@ frappe.ui.form.on("Ex Requests", {
     refresh(frm) {
         if (frm.is_new()) {
             frm.set_value('request_time', frappe.datetime.now_time());
+            frm.set_value('request_date', frappe.datetime.now_date());
         }
     },
 }); 

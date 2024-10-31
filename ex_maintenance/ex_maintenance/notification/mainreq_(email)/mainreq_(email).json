@@ -1,0 +1,31 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "creation": "2024-10-31 14:27:44.380542",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Ex Requests",
+ "enabled": 0,
+ "event": "New",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<h1>Maintenance Request</h1>\n\n<p>Please attend to the request sent:\n<br> <b>{{ doc.name }}</b> </p>\n\n<h5>Thank You</h5>\n",
+ "message_type": "Markdown",
+ "minutes_offset": 0,
+ "modified": "2024-10-31 17:19:13.579820",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "MainReq (Email)",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "Ex Maintenance Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "sender": "Nortex",
+ "sender_email": "nortexnoble@gmail.com",
+ "subject": "Maintenance Request {{ doc.name }}"
+}

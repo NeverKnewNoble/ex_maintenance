@@ -1,25 +1,35 @@
-
 import frappe
 from frappe.model.document import Document
 from frappe.utils import time_diff_in_seconds
+from datetime import datetime, time, timedelta  # Added 'timedelta'
 
 class ResponseTime(Document):
     pass
 
-# ! To calculate the average response time 
+# Function to calculate the average response time
 @frappe.whitelist()
 def calculate_average_response_time():
-    # Get all records from the "Response Time" doctype with request_time and completed_time fields
-    all_docs = frappe.get_all('Response Time', fields=['request_time', 'completed_time'])
+    # Get all records from the "Response Time" doctype with the relevant fields
+    all_docs = frappe.get_all('Response Time', fields=['request_date', 'request_time', 'completed_date', 'completed_time'])
 
     total_time_diff = 0
     count = 0
 
     # Loop through each document and calculate the time difference
     for doc in all_docs:
-        if doc.request_time and doc.completed_time:
+        if doc.request_date and doc.completed_date and doc.request_time and doc.completed_time:
+            # Ensure request_time and completed_time are of type datetime.time
+            if isinstance(doc.request_time, timedelta):
+                doc.request_time = (datetime.min + doc.request_time).time()
+            if isinstance(doc.completed_time, timedelta):
+                doc.completed_time = (datetime.min + doc.completed_time).time()
+
+            # Combine dates and times into full datetime objects
+            request_datetime = datetime.combine(doc.request_date, doc.request_time)
+            completed_datetime = datetime.combine(doc.completed_date, doc.completed_time)
+
             # Calculate the time difference in seconds
-            time_diff = time_diff_in_seconds(doc.completed_time, doc.request_time)
+            time_diff = time_diff_in_seconds(completed_datetime, request_datetime)
             total_time_diff += time_diff
             count += 1
 

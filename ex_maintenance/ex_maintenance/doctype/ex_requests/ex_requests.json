@@ -12,6 +12,7 @@
   "other",
   "column_break_fgcy",
   "request_time",
+  "request_date",
   "section_break_kqqs",
   "table_umyd",
   "convenient_time_scheduling_optional_section",
@@ -103,12 +104,17 @@
   {
    "fieldname": "request_time",
    "fieldtype": "Time",
-   "label": "Request TIme"
+   "label": "Request Time"
+  },
+  {
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-24 18:31:01.716668",
+ "modified": "2024-10-26 23:04:45.107215",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Requests",
