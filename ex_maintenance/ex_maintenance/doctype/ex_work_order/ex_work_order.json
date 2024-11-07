@@ -226,7 +226,7 @@
    "default": "0",
    "fieldname": "is_a_team",
    "fieldtype": "Check",
-   "label": "Is a Team"
+   "label": "To The Team"
   },
   {
    "depends_on": "eval:doc.is_a_team == 1",
@@ -238,7 +238,7 @@
    "default": "0",
    "fieldname": "is_an_indvidual",
    "fieldtype": "Check",
-   "label": "Is an Indvidual"
+   "label": "To An Individual"
   },
   {
    "depends_on": "eval:doc.is_an_indvidual == 1",
@@ -345,7 +345,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-30 10:16:25.083449",
+ "modified": "2024-11-06 16:13:38.469915",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Work Order",

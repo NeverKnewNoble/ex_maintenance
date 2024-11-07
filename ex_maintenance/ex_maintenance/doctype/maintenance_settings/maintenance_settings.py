@@ -7,6 +7,7 @@ from frappe.model.document import Document
 class MaintenanceSettings(Document):
     pass
 
+
 # ! Toggle Notification On/Off
 @frappe.whitelist()
 def toggle_notification(notification_title, enabled):

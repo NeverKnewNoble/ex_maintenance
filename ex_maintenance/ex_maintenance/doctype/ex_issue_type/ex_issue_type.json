@@ -13,8 +13,7 @@
    "fieldname": "issue_type",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Issue Type",
-   "options": "\nAir Conditioning\nPlumbing\nElectrical\nHousekeeping\nInternet\nTV/Cable\nHeating\nFurniture & Fixtures\nWindows & Doors\nElevator/Lift\nBathroom Issues\nPest Control\nSecurity Issues\nLaundry Service\nNoise Complaints\nRoom Amenities\nLighting\nPool/Spa\nParking\nMiscellaneous"
+   "label": "Issue Type"
   },
   {
    "fieldname": "description",
@@ -26,7 +25,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-10-18 11:24:33.135321",
+ "modified": "2024-11-06 22:50:19.559794",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Issue Type",

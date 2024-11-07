@@ -144,8 +144,29 @@ app_license = "mit"
 # 		"on_trash": "method"
 # 	}
 # }
+doc_events = {
+    "Doctype1": {
+        "on_update": "ex_maintenance.api.card.get_work_order_count"
+    },
+    "Doctype2": {
+        "on_update": "ex_maintenance.api.request.get_all_ex_requests"
+    },
+    "Doctype3": {
+        "on_update": "ex_maintenance.api.orderview.get_all_ex_work_orders"
+    },
+    "Doctype4": {
+        "on_update": "ex_maintenance.api.orderview.ex_work_ui"
+    },
+    "Doctype5": {
+        "on_update": "ex_maintenance.api.login.verify_login"
+    },
+}
 
-# Scheduled Tasks
+# Custom REST API method
+override_whitelisted_methods = {
+    "ex_maintenance.api.orderview.update_and_assign_ex_work_order": "ex_maintenance.api.orderview.update_and_assign_ex_work_order"
+}
+
 # ---------------
 
 # scheduler_events = {
