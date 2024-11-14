@@ -89,11 +89,7 @@ def create_task_assignment(ex_work_order):
         return str(e)
 
 
-
-
-
-
-#  ! Function to assign Task to the Team and create a New task Assignment Document
+# ! Assign to team Function
 @frappe.whitelist()
 def assign_to_team(ex_work_order):
     try:
@@ -177,10 +173,59 @@ def assign_to_team(ex_work_order):
         frappe.msgprint(f"Error: {str(e)}")
         return str(e)
 
+# Function to reopen Ex Work Order and reassign Task with full field updates
+@frappe.whitelist()
+def reopen_and_reassign_task(ex_work_order_name):
+    try:
+        # Fetch the Ex Work Order document
+        ex_work_order = frappe.get_doc("Ex Work Order", ex_work_order_name)
 
+        # Update Ex Work Order status to "Open"
+        ex_work_order.status = "Open"
+        ex_work_order.save(ignore_permissions=True)
 
+        # Get the Task Assignment reference
+        task_assignment_reference = ex_work_order.task_assignment_reference
 
+        if task_assignment_reference:
+            # Fetch the referenced Task Assignment document
+            task_assignment = frappe.get_doc("Task Assignments", task_assignment_reference)
 
+            # Update the relevant fields in Task Assignments
+            task_assignment.priority = ex_work_order.priority_level
+            task_assignment.status = "Open"  # Setting status to open
+            task_assignment.deadline_set_date = ex_work_order.deadline_date
+            task_assignment.deadline_set_time = ex_work_order.deadline_time
+            task_assignment.request_code = ex_work_order.request_code
+            task_assignment.instructions = ex_work_order.assign_task[0].get("instructions")  # Assuming single task
+            
+            # Clear and update issues
+            task_assignment.set("issue", [])
+            if ex_work_order.get('issue'):
+                for item in ex_work_order.get('issue'):
+                    task_assignment.append('issue', {
+                        'issue_type': item.get('issue_type'),
+                        'description': item.get('description')
+                    })
+
+            # Save the updated Task Assignment document
+            task_assignment.save(ignore_permissions=True)
+
+            # Reassign the document to the specified user in the Ex Work Order's `assign_task`
+            frappe.desk.form.assign_to.add({
+                'assign_to': [task_assignment.assignee],
+                'doctype': 'Task Assignments',
+                'name': task_assignment.name,
+                'description': "Reopened and reassigned task.",
+                'notify': 1
+            })
+        else:
+            frappe.msgprint("No task assignment reference found.")
+            
+    except Exception as e:
+        frappe.log_error(f"Error reopening and reassigning Task Assignment: {str(e)}")
+        frappe.msgprint(f"Error: {str(e)}")
+        return str(e)
 
 
 
@@ -207,3 +252,135 @@ def response(ex_request):
         frappe.log_error(f"Error creating Response Time Updated: {str(e)}")
         frappe.msgprint(f"Error: {str(e)}")
         return str(e)
+
+
+
+
+
+# ! Function to reopen Ex Work Order and reassign Task with full field updates
+@frappe.whitelist()
+def reopen_and_reassign_task(ex_work_order_name):
+    try:
+        # Fetch the Ex Work Order document
+        ex_work_order = frappe.get_doc("Ex Work Order", ex_work_order_name)
+
+        # Update Ex Work Order status to "Open"
+        ex_work_order.status = "Open"
+        ex_work_order.save(ignore_permissions=True)
+
+        # Get the Task Assignment reference
+        task_assignment_reference = ex_work_order.task_assignment_reference
+
+        if task_assignment_reference:
+            # Fetch the referenced Task Assignment document
+            task_assignment = frappe.get_doc("Task Assignments", task_assignment_reference)
+
+            # Update the relevant fields in Task Assignments
+            task_assignment.priority = ex_work_order.priority_level
+            task_assignment.status = "Open"  # Setting status to open
+            task_assignment.deadline_set_date = ex_work_order.deadline_date
+            task_assignment.deadline_set_time = ex_work_order.deadline_time
+            task_assignment.request_code = ex_work_order.request_code
+            task_assignment.instructions = ex_work_order.assign_task[0].get("instructions")  # Assuming single task
+            
+            # Clear and update issues
+            task_assignment.set("issue", [])
+            if ex_work_order.get('issue'):
+                for item in ex_work_order.get('issue'):
+                    task_assignment.append('issue', {
+                        'issue_type': item.get('issue_type'),
+                        'description': item.get('description')
+                    })
+
+            # Save the updated Task Assignment document
+            task_assignment.save(ignore_permissions=True)
+
+            # Reassign the document to the specified user in the Ex Work Order's `assign_task`
+            frappe.desk.form.assign_to.add({
+                'assign_to': [task_assignment.assignee],
+                'doctype': 'Task Assignments',
+                'name': task_assignment.name,
+                'description': "Reopened and reassigned task.",
+                'notify': 1
+            })
+        else:
+            frappe.msgprint("No task assignment reference found.")
+            
+    except Exception as e:
+        frappe.log_error(f"Error reopening and reassigning Task Assignment: {str(e)}")
+        frappe.msgprint(f"Error: {str(e)}")
+        return str(e)
+
+# Function to reopen Ex Work Order and reassign Task to Team with field updates
+@frappe.whitelist()
+def reopen_and_assign_to_team(ex_work_order_name):
+    try:
+        # Fetch the Ex Work Order document
+        ex_work_order = frappe.get_doc("Ex Work Order", ex_work_order_name)
+
+        # Update Ex Work Order status to "Open"
+        ex_work_order.status = "Open"
+        ex_work_order.save(ignore_permissions=True)
+
+        # Get the Task Assignment reference
+        task_assignment_reference = ex_work_order.task_assignment_reference
+
+        if task_assignment_reference:
+            # Fetch the referenced Task Assignment document
+            task_assignment = frappe.get_doc("Task Assignments", task_assignment_reference)
+
+            # Update only the specified fields in Task Assignments
+            task_assignment.priority = ex_work_order.priority_level
+            task_assignment.status = "Open"  # Setting status to open
+            task_assignment.deadline_set_date = ex_work_order.deadline_date
+            task_assignment.deadline_set_time = ex_work_order.deadline_time
+            task_assignment.instructions = ex_work_order.team_descriptioninstructions
+
+            # Save the updated Task Assignment document
+            task_assignment.save(ignore_permissions=True)
+
+            # Get team members with the "Ex Maintenance Team Member" role
+            team_members = frappe.get_all(
+                "Has Role",
+                filters={"role": "Ex Maintenance Team Member"},
+                fields=["parent"]
+            )
+
+            # Assign the task to each team member
+            for member in team_members:
+                frappe.desk.form.assign_to.add({
+                    'assign_to': [member['parent']],
+                    'doctype': 'Task Assignments',
+                    'name': task_assignment.name,
+                    'description': f"Reopened and reassigned task to team.",
+                    'notify': 1
+                })
+        else:
+            frappe.msgprint("No task assignment reference found.")
+
+    except Exception as e:
+        frappe.log_error(f"Error reopening and reassigning Task Assignment to team: {str(e)}")
+        frappe.msgprint(f"Error: {str(e)}")
+        return str(e)
+
+
+@frappe.whitelist()
+def reopen_and_assign_to_both_tasks(ex_work_order_name):
+    try:
+        # Fetch the Ex Work Order document
+        ex_work_order = frappe.get_doc("Ex Work Order", ex_work_order_name)
+
+        # Check if 'is_a_team' or 'is_an_individual' is set
+        if ex_work_order.is_a_team == 1:
+            reopen_and_assign_to_team(ex_work_order_name)
+        elif ex_work_order.is_an_indvidual == 1:
+            reopen_and_reassign_task(ex_work_order_name)
+        else:
+            frappe.msgprint("Please specify whether the assignment is for a team or an individual.")
+
+    except Exception as e:
+        frappe.log_error(f"Error reopening and assigning tasks: {str(e)}")
+        frappe.msgprint(f"Error: {str(e)}")
+        return str(e)
+
+

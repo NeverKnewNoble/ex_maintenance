@@ -34,8 +34,9 @@
   "priority_level",
   "column_break_gyzr",
   "status",
-  "completed_date",
+  "request_date_created",
   "request_time_created",
+  "completed_date",
   "request_completed_time",
   "assign_task_to_teamindividual_section",
   "is_a_team",
@@ -341,11 +342,17 @@
    "fieldtype": "Link",
    "label": "Task Assignment Reference",
    "options": "Task Assignments"
+  },
+  {
+   "fetch_from": "request_code.request_date",
+   "fieldname": "request_date_created",
+   "fieldtype": "Date",
+   "label": "Request Date Created"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-06 16:13:38.469915",
+ "modified": "2024-11-09 11:29:00.601871",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Work Order",

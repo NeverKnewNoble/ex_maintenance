@@ -78,3 +78,23 @@ frappe.ui.form.on("Ex Work Order", {
 });
 
     
+// !
+frappe.ui.form.on('Ex Work Order', {
+    refresh: function(frm) {
+        // Add a custom button to reopen and reassign the task
+        frm.add_custom_button(__('Reopen and Reassign Task'), function() {
+            frappe.call({
+                method: "ex_maintenance.ex_maintenance.doctype.ex_work_order.ex_work_order.reopen_and_assign_to_both_tasks",
+                args: {
+                    ex_work_order_name: frm.doc.name
+                },
+                callback: function(response) {
+                    if (!response.exc) {
+                        frappe.msgprint(__('The task has been reopened and reassigned successfully.'));
+                        frm.reload_doc(); // Refresh the document to reflect the updated status
+                    }
+                }
+            });
+        }).addClass('btn-primary');
+    }
+});
