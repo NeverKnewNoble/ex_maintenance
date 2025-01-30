@@ -173,7 +173,7 @@ def assign_to_team(ex_work_order):
         frappe.msgprint(f"Error: {str(e)}")
         return str(e)
 
-# Function to reopen Ex Work Order and reassign Task with full field updates
+# ! Function to reopen Ex Work Order and reassign Task with full field updates
 @frappe.whitelist()
 def reopen_and_reassign_task(ex_work_order_name):
     try:
@@ -233,25 +233,27 @@ def reopen_and_reassign_task(ex_work_order_name):
 @frappe.whitelist()
 def response(ex_request):
     try:
-        # Ensure ex_request is a dictionary if it's not already a Frappe document
         if isinstance(ex_request, str):
             ex_request = frappe.parse_json(ex_request)
 
-        # Create the new Response document
+        # Ensure required fields exist
+        if not ex_request.get('name') or not ex_request.get('request_code'):
+            frappe.throw("Missing required fields in ex_request.")
+
         response_order = frappe.get_doc({
             'doctype': 'Response Time',
             'management_document': ex_request.get('name'),
             'request_document': ex_request.get('request_code'),
         })
 
-        # Save the new Work Order (as draft)
         response_order.insert()
+        frappe.db.commit()  # Commit the transaction
 
+        return {"message": "Response Time created successfully!"}
 
     except Exception as e:
-        frappe.log_error(f"Error creating Response Time Updated: {str(e)}")
-        frappe.msgprint(f"Error: {str(e)}")
-        return str(e)
+        frappe.log_error(f"Error creating Response Time: {str(e)}", "Response Time Creation Error")
+        return {"error": str(e)}
 
 
 

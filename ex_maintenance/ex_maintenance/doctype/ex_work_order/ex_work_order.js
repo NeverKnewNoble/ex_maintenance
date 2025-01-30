@@ -56,16 +56,14 @@ frappe.ui.form.on('Ex Work Order', {
     }
 });
 
-
+// ! Function to call response code when order is completed
 frappe.ui.form.on("Ex Work Order", {
-    // ! Function to call response code when order is completed
     after_save: function(frm) {
-        // Check if the status is 'Completed'
         if (frm.doc.status === 'Completed') {
             frappe.call({
-                method: 'ex_maintenance.ex_maintenance.doctype.ex_work_order.ex_work_order.response',  // Corrected method name
+                method: 'ex_maintenance.ex_maintenance.doctype.ex_work_order.ex_work_order.response',
                 args: {
-                    ex_request: frm.doc  // Pass the form data as an object
+                    ex_request: JSON.stringify(frm.doc)  // Convert document to JSON string
                 },
                 callback: function(response) {
                     if (response.message) {
@@ -76,6 +74,7 @@ frappe.ui.form.on("Ex Work Order", {
         }
     }
 });
+
 
     
 // !
