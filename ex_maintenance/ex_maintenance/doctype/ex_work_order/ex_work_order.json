@@ -8,12 +8,10 @@
  "field_order": [
   "request_details_tab",
   "column_break_dlzp",
-  "hidden_field_copy",
   "image",
   "column_break_uvkv",
   "image_uploaded",
   "column_break_nesx",
-  "hidden_field_copy_copy",
   "request_section",
   "location",
   "column_break_qqwy",
@@ -54,7 +52,6 @@
   "column_break_wlqo",
   "image_spwk",
   "column_break_dnmj",
-  "dummy_field",
   "section_break_cokp",
   "description_on_the_task",
   "task_assignment_reference"
@@ -88,7 +85,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.location == 'Guest Room'",
+   "depends_on": "eval:doc.room_number",
    "fetch_from": "request_code.room_number",
    "fieldname": "room_number",
    "fieldtype": "Data",
@@ -123,7 +120,7 @@
   },
   {
    "fieldname": "date",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Date",
    "read_only": 1
   },
@@ -133,8 +130,8 @@
   },
   {
    "fieldname": "time",
-   "fieldtype": "Data",
-   "label": "TIme",
+   "fieldtype": "Time",
+   "label": "Time",
    "read_only": 1
   },
   {
@@ -148,9 +145,11 @@
    "read_only": 1
   },
   {
+   "default": "Open",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Open\nIn Progress\nCompleted\nOverdue"
   },
@@ -172,13 +171,15 @@
    "depends_on": "eval:doc.status == 'Completed'",
    "fieldname": "completed_date",
    "fieldtype": "Date",
-   "label": "Completed Date"
+   "label": "Completed Date",
+   "read_only": 1
   },
   {
    "depends_on": "eval:doc.status == 'Completed'",
    "fieldname": "request_completed_time",
    "fieldtype": "Time",
-   "label": "Request Completed Time"
+   "label": "Request Completed Time",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_dlzp",
@@ -275,12 +276,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "dummy_field",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "dummy field"
-  },
-  {
    "fieldname": "section_break_cokp",
    "fieldtype": "Section Break"
   },
@@ -295,25 +290,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "hidden_field_copy",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "hidden field Copy"
-  },
-  {
    "fieldname": "column_break_nesx",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "hidden_field_copy_copy",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "hidden field Copy Copy"
-  },
-  {
+   "fetch_from": "request_code.location",
    "fieldname": "location",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Location",
+   "options": "Maintenance Location",
    "read_only": 1
   },
   {
@@ -341,7 +326,8 @@
    "fieldname": "task_assignment_reference",
    "fieldtype": "Link",
    "label": "Task Assignment Reference",
-   "options": "Task Assignments"
+   "options": "Task Assignments",
+   "read_only": 1
   },
   {
    "fetch_from": "request_code.request_date",
@@ -352,7 +338,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-09 11:29:00.601871",
+ "modified": "2026-10-03 07:55:00.000000",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Work Order",
@@ -370,9 +356,22 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Ex Maintenance Manager",
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

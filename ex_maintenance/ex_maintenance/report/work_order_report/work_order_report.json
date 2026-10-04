@@ -9,7 +9,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2024-11-09 08:03:10.771762",
+ "modified": "2026-10-02 16:20:00.000000",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Work Order Report",
@@ -18,6 +18,13 @@
  "ref_doctype": "Ex Work Order",
  "report_name": "Work Order Report",
  "report_type": "Script Report",
- "roles": [],
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Ex Maintenance Manager"
+  }
+ ],
  "timeout": 0
 }

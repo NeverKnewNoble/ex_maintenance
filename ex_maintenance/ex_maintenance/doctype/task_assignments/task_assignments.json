@@ -20,7 +20,6 @@
   "column_break_cgpt",
   "picture_of",
   "column_break_qaab",
-  "dummy_field",
   "section_break_rslo",
   "location",
   "column_break_aayy",
@@ -145,20 +144,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "dummy_field",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Dummy Field"
-  },
-  {
    "fieldname": "section_break_rslo",
    "fieldtype": "Section Break"
   },
   {
    "fetch_from": "request_code.location",
    "fieldname": "location",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Location",
+   "options": "Maintenance Location",
    "read_only": 1
   },
   {
@@ -177,7 +171,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "depends_on": "eval:doc.location == 'Guest Room'",
+   "depends_on": "eval:doc.room_number",
    "fetch_from": "request_code.room_number",
    "fieldname": "room_number",
    "fieldtype": "Data",
@@ -252,14 +246,19 @@
    "read_only": 1
   },
   {
+   "default": "Open",
    "fieldname": "task_status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Open\nIn Progress\nCompleted"
   },
   {
    "fieldname": "assignee",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Assignee",
    "options": "User",
    "read_only": 1
@@ -283,7 +282,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-31 16:14:54.047228",
+ "modified": "2026-10-03 07:55:00.000000",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Task Assignments",
@@ -301,9 +300,29 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Ex Maintenance Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Ex Maintenance Team Member",
+   "write": 1
   }
  ],
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

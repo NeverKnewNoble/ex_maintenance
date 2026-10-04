@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "ex_maintenance.install.before_install"
-# after_install = "ex_maintenance.install.after_install"
+after_install = "ex_maintenance.setup.install.after_install"
 
 # Uninstallation
 # ------------
@@ -117,13 +117,13 @@ app_license = "mit"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+	"Task Assignments": "ex_maintenance.ex_maintenance.doctype.task_assignments.task_assignments.get_permission_query_conditions",
+}
+
+has_permission = {
+	"Task Assignments": "ex_maintenance.ex_maintenance.doctype.task_assignments.task_assignments.has_permission",
+}
 
 # DocType Class
 # ---------------
@@ -144,29 +144,6 @@ app_license = "mit"
 # 		"on_trash": "method"
 # 	}
 # }
-doc_events = {
-    "Doctype1": {
-        "on_update": "ex_maintenance.api.card.get_work_order_count"
-    },
-    "Doctype2": {
-        "on_update": "ex_maintenance.api.request.get_all_ex_requests"
-    },
-    "Doctype3": {
-        "on_update": "ex_maintenance.api.orderview.get_all_ex_work_orders"
-    },
-    "Doctype4": {
-        "on_update": "ex_maintenance.api.orderview.ex_work_ui"
-    },
-    "Doctype5": {
-        "on_update": "ex_maintenance.api.login.verify_login"
-    },
-}
-
-# Custom REST API method
-override_whitelisted_methods = {
-    "ex_maintenance.api.orderview.update_and_assign_ex_work_order": "ex_maintenance.api.orderview.update_and_assign_ex_work_order"
-}
-
 # ---------------
 
 # scheduler_events = {
@@ -262,4 +239,3 @@ override_whitelisted_methods = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

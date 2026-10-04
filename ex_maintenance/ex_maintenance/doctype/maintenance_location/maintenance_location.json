@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:location_name",
+ "creation": "2026-10-03 07:55:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "location_name",
+  "facility_type",
+  "column_break_main",
+  "requires_room_number",
+  "disabled",
+  "issues_section",
+  "issues"
+ ],
+ "fields": [
+  {
+   "fieldname": "location_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Location / Room",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "General",
+   "description": "General locations are available for every facility type",
+   "fieldname": "facility_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Facility Type",
+   "options": "General\nHotel\nSchool\nOffice",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Ask for a room number when this location is chosen (e.g. Guest Room, Classroom)",
+   "fieldname": "requires_room_number",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Requires Room Number"
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Disabled"
+  },
+  {
+   "description": "Issues people can pick when raising a request for this location. Leave empty to allow any issue.",
+   "fieldname": "issues_section",
+   "fieldtype": "Section Break",
+   "label": "Common Issues"
+  },
+  {
+   "fieldname": "issues",
+   "fieldtype": "Table",
+   "label": "Issues",
+   "options": "Maintenance Location Issue"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-03 07:55:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ex Maintenance",
+ "name": "Maintenance Location",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Ex Maintenance Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Ex Maintenance Team Member"
+  }
+ ],
+ "search_fields": "facility_type",
+ "sort_field": "location_name",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "location_name",
+ "track_changes": 1
+}

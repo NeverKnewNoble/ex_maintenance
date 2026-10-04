@@ -1,29 +1,31 @@
 import frappe
 from frappe import _
-from frappe import auth
-import secrets
+from frappe.auth import LoginManager
 
-# ? --------------- API POST CALL TO CONFIRM LOGIN AUTHENTICATION ----------------------------
-@frappe.whitelist(allow_guest=True)
+
+# ? --------------- API POST CALL TO LOG IN ----------------------------
+# Logs the user in through Frappe's LoginManager (lockout, disabled users, 2FA, IP rules)
+# and starts a session: the app must keep the `sid` cookie and send it on later API calls.
+@frappe.whitelist(allow_guest=True, methods=["POST"])
 def verify_login(username, password):
-    """Verify the user's login credentials."""
-    try:
-        # Check if the user exists
-        user = frappe.db.get_value("User", {"email": username})
-        if not user:
-            return {"status": "failed", "message": _("Invalid username")}
+	frappe.form_dict.update({"usr": username, "pwd": password})
+	login_manager = LoginManager()
 
-        # Validate the credentials using Frappe's authenticate method
-        user_doc = frappe.get_doc("User", user)
-        if user_doc and frappe.utils.password.check_password(user_doc.name, password):
-            # If the credentials are valid, return success with full name
-            full_name = user_doc.full_name
-            return {"status": "success", "message": _("Login successful"), "full_name": full_name}
-        else:
-            return {"status": "failed", "message": _("Invalid password")}
-    
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
-    
+	try:
+		logged_in = login_manager.login() is not False
+	except frappe.AuthenticationError:
+		frappe.clear_messages()
+		frappe.local.response["http_status_code"] = 401
+		logged_in = False
+
+	if not logged_in:
+		return {"status": "failed", "message": _("Invalid login credentials")}
+
+	return {
+		"status": "success",
+		"message": _("Login successful"),
+		"full_name": frappe.db.get_value("User", frappe.session.user, "full_name"),
+	}
+
 
 # http://127.0.0.1:8001/api/v2/method/ex_maintenance.api.login.verify_login
