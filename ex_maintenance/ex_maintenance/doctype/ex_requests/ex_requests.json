@@ -8,6 +8,7 @@
  "field_order": [
   "your_location_section",
   "location",
+  "requires_room_number",
   "room_number",
   "other",
   "column_break_fgcy",
@@ -56,10 +57,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.location == 'Guest Room'",
+   "depends_on": "eval:doc.requires_room_number",
    "fieldname": "room_number",
    "fieldtype": "Data",
-   "label": "Room Number"
+   "label": "Room Number",
+   "mandatory_depends_on": "eval:doc.requires_room_number"
   },
   {
    "depends_on": "eval:doc.location == 'Other'",
@@ -78,9 +80,18 @@
   },
   {
    "fieldname": "location",
-   "fieldtype": "Select",
-   "label": "Location/Room",
-   "options": "\nGuest Room\nLobby\nLounge Area\nPool Area\nGym/Fitness Center\nSpa\nSavana Bar/Hotel bar\nRestaurant\nConference Hall\nMeeting Room\nBanquet Hall\nRooftop Bar\nBusiness Center\nElevators\nParking Lot\nReception Desk\nGarden/Patio\nTerrace\nBallroom\nValet Parking Area\nOther"
+   "fieldtype": "Link",
+   "label": "Location / Room",
+   "options": "Maintenance Location",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "location.requires_room_number",
+   "fieldname": "requires_room_number",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Requires Room Number",
+   "read_only": 1
   },
   {
    "fieldname": "convenient_time_scheduling_optional_section",
@@ -104,17 +115,19 @@
   {
    "fieldname": "request_time",
    "fieldtype": "Time",
-   "label": "Request Time"
+   "label": "Request Time",
+   "read_only": 1
   },
   {
    "fieldname": "request_date",
    "fieldtype": "Date",
-   "label": "Request Date"
+   "label": "Request Date",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-06 23:12:24.803649",
+ "modified": "2026-10-03 07:55:00.000000",
  "modified_by": "Administrator",
  "module": "Ex Maintenance",
  "name": "Ex Requests",
@@ -132,9 +145,28 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Ex Maintenance Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Ex Maintenance Team Member"
   }
  ],
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

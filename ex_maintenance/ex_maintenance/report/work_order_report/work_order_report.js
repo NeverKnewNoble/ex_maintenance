@@ -20,8 +20,8 @@ frappe.query_reports["Work Order Report"] = {
 		{
             "fieldname": "location",
             "label": __("Location"),
-            "fieldtype": "Select",
-			"options": "\nGuest Room\nLobby\nLounge Area\nPool Area\nGym/Fitness Center\nSpa\nSavana Bar/Hotel bar\nRestaurant\nConference Hall\nMeeting Room\nBanquet Hall\nRooftop Bar\nBusiness Center\nElevators\nParking Lot\nReception Desk\nGarden/Patio\nTerrace\nBallroom\nValet Parking Area\nOther",
+            "fieldtype": "Link",
+            "options": "Maintenance Location",
             "width": 80
         },
 		{

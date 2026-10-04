@@ -2,99 +2,71 @@
 # For license information, please see license.txt
 
 import frappe
-import json
+from frappe import _
 from frappe.model.document import Document
-from frappe.utils import now, now_datetime
+from frappe.utils import format_datetime, now_datetime
+
+TEAM_ROLE = "Ex Maintenance Team Member"
+MANAGER_ROLES = {"System Manager", "Ex Maintenance Manager"}
 
 
 class TaskAssignments(Document):
-    pass
+	pass
 
 
-#  ! Function To Update The Work Order For The Manager On Task Progress
-# @frappe.whitelist()
-# def update_linked_document(doc_reference, task_status, description_on_the_task, attach_work_progress=None):
-#     try:
-#         # Convert doc_reference from JSON string to dictionary if necessary
-#         if isinstance(doc_reference, str):
-#             doc_reference = json.loads(doc_reference)
-
-#         # Prepare the field values to update
-#         update_fields = {
-#             'status': task_status,
-#             'description_on_the_task': description_on_the_task,
-#             'attach_image_rypl': attach_work_progress or ""
-#         }
-
-#         # Check if status is 'Completed' and set date and time accordingly
-#         if task_status == 'Completed':
-#             update_fields['completed_date'] = frappe.utils.nowdate()
-#             update_fields['request_completed_time'] = frappe.utils.nowtime()
-#         else:
-#             # Clear the date and time if status is not 'Completed'
-#             update_fields['completed_date'] = None
-#             update_fields['request_completed_time'] = None
-
-#         # Perform the update directly in the database
-#         frappe.db.set_value(doc_reference['doctype'], doc_reference['name'], update_fields)
-
-#         # Commit the changes to the database
-#         frappe.db.commit()
-
-#         frappe.log_error("Document updated directly using DB update", "Update Linked Document")
-#         return "success"
-
-#     except Exception as e:
-#         # Log error if something goes wrong
-#         frappe.log_error(f"Error during direct DB update: {str(e)}", "Update Linked Document - Error")
-#         return "error"
+# ! Team members only see the tasks they are assigned to (directly or as part of the team)
+def _is_restricted(user):
+	roles = set(frappe.get_roles(user))
+	return TEAM_ROLE in roles and not roles & MANAGER_ROLES
 
 
+def get_permission_query_conditions(user=None):
+	user = user or frappe.session.user
+	if not _is_restricted(user):
+		return ""
+
+	assignee, assigned = frappe.db.escape(user), frappe.db.escape(f'%"{user}"%')
+	return f"(`tabTask Assignments`.assignee = {assignee} or `tabTask Assignments`._assign like {assigned})"
 
 
+def has_permission(doc, ptype=None, user=None, debug=False):
+	user = user or frappe.session.user
+	if not _is_restricted(user):
+		return True
+
+	return doc.assignee == user or user in frappe.parse_json(doc.get("_assign") or "[]")
+
+
+# ! Update the Work Order with the technician's progress
 @frappe.whitelist()
 def update_linked_document(doc_reference, task_status, description_on_the_task, attach_work_progress=None):
-    try:
-        # Convert doc_reference from JSON string to dictionary if necessary
-        if isinstance(doc_reference, str):
-            doc_reference = json.loads(doc_reference)
+	if isinstance(doc_reference, str) and doc_reference.lstrip().startswith("{"):
+		doc_reference = frappe.parse_json(doc_reference)
+	if isinstance(doc_reference, dict):
+		if doc_reference.get("doctype", "Ex Work Order") != "Ex Work Order":
+			frappe.throw(_("Only Ex Work Orders can be updated from a Task Assignment."))
+		doc_reference = doc_reference.get("name")
 
-        # Prepare the field values to update
-        update_fields = {
-            'status': task_status,
-            'description_on_the_task': description_on_the_task,
-            'attach_image_rypl': attach_work_progress or ""
-        }
+	work_order = frappe.get_doc("Ex Work Order", doc_reference)
+	if not _can_update(work_order):
+		frappe.throw(_("You are not assigned to this Work Order."), frappe.PermissionError)
 
-        # Check if status is 'Completed' and set date and time accordingly
-        if task_status == 'Completed':
-            update_fields['completed_date'] = frappe.utils.nowdate()
-            update_fields['request_completed_time'] = frappe.utils.nowtime()
-        else:
-            # Clear the date and time if status is not 'Completed'
-            update_fields['completed_date'] = None
-            update_fields['request_completed_time'] = None
+	timestamp = format_datetime(now_datetime(), "MMM dd, yyyy hh:mm a")
+	new_log_entry = f"{frappe.session.user} updated this document on {timestamp}"
 
-        # Fetch current status change logs and add a new entry
-        current_logs = frappe.db.get_value(doc_reference['doctype'], doc_reference['name'], 'status_change_logs') or ""
-        user = frappe.session.user
-        timestamp = frappe.utils.format_datetime(now_datetime(), "MMM dd, yyyy hh:mm a")
-        new_log_entry = f"{user} updated this document on {timestamp}"
+	work_order.status = task_status
+	work_order.description_on_the_task = description_on_the_task
+	work_order.attach_image_rypl = attach_work_progress or ""
+	work_order.status_change_logs = "\n".join(filter(None, [work_order.status_change_logs, new_log_entry]))
 
-        # Append new log entry to the existing logs
-        updated_logs = f"{current_logs}\n{new_log_entry}" if current_logs else new_log_entry
-        update_fields['status_change_logs'] = updated_logs
+	# Technicians don't have access to Work Orders; _can_update() has checked they are assigned
+	work_order.save(ignore_permissions=True)
+	return "success"
 
-        # Perform the update directly in the database
-        frappe.db.set_value(doc_reference['doctype'], doc_reference['name'], update_fields)
 
-        # Commit the changes to the database
-        frappe.db.commit()
+def _can_update(work_order):
+	if frappe.has_permission("Ex Work Order", "write", work_order):
+		return True
 
-        frappe.log_error("Document updated directly using DB update", "Update Linked Document")
-        return "success"
-
-    except Exception as e:
-        # Log error if something goes wrong
-        frappe.log_error(f"Error during direct DB update: {str(e)}", "Update Linked Document - Error")
-        return "error"
+	# get_list applies the Task Assignments permission rules above
+	return bool(frappe.get_list("Task Assignments", filters={"doc_reference": work_order.name}, limit=1))
